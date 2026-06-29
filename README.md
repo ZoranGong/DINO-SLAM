@@ -1,13 +1,13 @@
-# Ov3R
+# DINO-SLAM
 
-This is the repository that contains source code for the [Ov3R website](https://zorangong.github.io/Ov3R_page/).
+This is the repository that contains source code for the [DINO-SLAM website](https://zorangong.github.io/Ov3R_page/).
 
-If you find Nerfies useful for your work please cite:
+If you find DINO-SLAM useful for your work please cite:
 ```
-@article{gong2025ov3r,
-  title={Ov3R: Open-Vocabulary Semantic 3D Reconstruction from RGB Videos},
-  author={Gong, Ziren and Li, Xiaohan and Tosi, Fabio and Han, Jiawei and Mattoccia, Stefano and Cai, Jianfei and Poggi, Matteo},
-  journal={arXiv preprint arXiv:2507.22052},
+@article{gong2025dino,
+  title={DINO-SLAM: DINO-informed RGB-D SLAM for Neural Implicit and Explicit Representations},
+  author={Gong, Ziren and Li, Xiaohan and Tosi, Fabio and Zhang, Youmin and Mattoccia, Stefano and Wu, Jun and Poggi, Matteo},
+  journal={arXiv preprint arXiv:2507.19474},
   year={2025}
 }
 ```
