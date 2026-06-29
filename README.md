@@ -4,9 +4,9 @@ This is the repository that contains source code for the [DINO-SLAM website](htt
 
 If you find DINO-SLAM useful for your work please cite:
 ```
-@inproceedings{gong2026magist3r,
-  title={MAGiSt3R: Multi-Agent Feed-forward 3D Reconstruction from Monocular RGB Videos},
-  author={Gong, Ziren and Li, Xiaohan and Tosi, Fabio and Xu, Ninghui and Mattoccia, Stefano and Cai, Jianfei and Poggi, Matteo},
+@inproceedings{gong2025dino,
+  title={DINO-SLAM: DINO-informed RGB-D SLAM for Neural Implicit and Explicit Representations},
+  author={Gong, Ziren and Li, Xiaohan and Tosi, Fabio and Zhang, Youmin and Mattoccia, Stefano and Wu, Jun and Poggi, Matteo},
   booktitle={European Conference on Computer Vision},
   year={2026}
 }
