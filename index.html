@@ -6,7 +6,7 @@
         content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
   <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ov3R: Open-Vocabulary Semantic 3D Reconstruction from RGB Videos</title>
+  <title>DINO-SLAM: DINO-informed RGB-D SLAM for Neural Implicit and Explicit Representations</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -73,13 +73,13 @@
               <a href="https://fabiotosi92.github.io/">Fabio Tosi</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?hl=zh-CN&user=H_uqMz0AAAAJ">Jiawei Han</a><sup>3</sup>,
+              <a href="https://scholar.google.com/citations?hl=zh-CN&user=H_uqMz0AAAAJ">Youmin Zhang</a><sup>3</sup>,
             </span>
             <span class="author-block">
               <a href="http://vision.deis.unibo.it/~smatt/Site/Home.html">Stefano Mattocia</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="https://jianfei-cai.github.io/">Jianfei Cai</a><sup>4</sup>,
+              <a href="https://jianfei-cai.github.io/">Jun Wu</a><sup>4</sup>,
             </span>
             <span class="author-block">
               <a href="https://mattpoggi.github.io/">Matteo Poggi</a><sup>1</sup>,
@@ -88,16 +88,16 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>University of Bologna,</span>
-            <span class="author-block"><sup>2</sup>University of Hongkong</span>
-            <span class="author-block"><sup>3</sup>Beijing Institute of Technology</span>
-            <span class="author-block"><sup>4</sup>Monash University</span>
+            <span class="author-block"><sup>2</sup>The University of Hongkong</span>
+            <span class="author-block"><sup>3</sup>Rawmantic AI</span>
+            <span class="author-block"><sup>4</sup>Fudan University</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2507.22052"
+                <a href="https://arxiv.org/abs/2507.19474"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -107,7 +107,7 @@
               </span>
               <!-- Video Link. -->
               <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=DfUkC-DVyrg"
+                <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
@@ -136,7 +136,7 @@
                   </a>
               <!-- results Link. -->
               <span class="link-block">
-                <a href="https://drive.google.com/file/d/10q3I0boBu5nDRzcZf1LoQTOkPDElDoFk/view?usp=sharing"
+                <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="far fa-images"></i>
@@ -159,7 +159,7 @@
              alt="NIS-SLAM architecture."/>
       <h2 class="subtitle has-text-justified">
         <p>
-        <b>Pipeline of Ov3R</b>. Ov3R is an Open-Vocabulary Semantic 3D Reconstruction Framework. It consists of two novel feed-forward modules, CLIP3R and 2D–3D OVS, and excels in both 3D reconstruction and open-vocabulary 3D semantic segmentation.
+        <b>Pipeline of DINO </b>. DINO-SLAM is a geometry-aware visual foundation feature informed neural SLAM framework. Both neural representations share the same structure of Scene Geometry Encoder (SGE) to capture geometry-aware DINO (geoDINO) and DINO features.
         </p>
       </h2>
     </div>
@@ -174,13 +174,13 @@
         <h2 class="title is-3">Abstract</h2>
         <h2 class="content has-text-justified">
           <p>
-             We present Ov3R, a novel framework for open-vocabulary semantic 3D reconstruction from RGB video streams, designed to advance Spatial AI.
+             a DINO-informed design strategy to enhance implicit (Neural Radiance Field -- NeRF) and explicit representations (Gaussian Splatting -- GS) in SLAM systems through the more comprehensive semantics understanding enabled by DINO.
           </p>
           <p>
-             The system features two key components: CLIP3R, a CLIP-informed 3D reconstruction module that predicts dense point maps from overlapping clips alongside object-level semantics; and 2D–3D OVS, a 2D-3D open-vocabulary semantic module that lifts 2D features into 3D by learning fused descriptors integrating spatial, geometric, and semantic cues. Unlike prior methods, Ov3R incorporates CLIP semantics directly into the reconstruction process, enabling globally consistent geometry and fine-grained semantic alignment.
+             This latter alone, however, lacks proper 3D geometry understanding, allowing only for marginal improvements. Therefore, we rely on a Scene Geometry Encoder (SGE) to enrich DINO features into geometry-aware DINO features (geoDINO), to better understand those geometric relationships that vanilla DINO features fail to capture. Building upon it, we propose two foundational paradigms for NeRF and GS SLAM systems integrating geoDINO features.
           </p>
           <p>
-             Our framework achieves state-of-the-art performance in both dense 3D reconstruction and open-vocabulary 3D segmentation — marking a step forward toward real-time, semantics-aware Spatial AI.
+             Compared to state-of-the-art methods, our DINO-informed pipelines achieve superior performance on the Replica, ScanNet, and TUM datasets.
           </p>
         </h2>
       </div>
@@ -196,8 +196,17 @@
              alt="Reconstruction Result."/>
         </div>
         <p>
-          <strong><font size="4">Annotations:</font></strong> Given RGB-only videos, we first apply CLIP3R to produce scene points while SAM predicts 2D segments. Each 2D segment is matched to its corresponding 3D points to obtain 3D semantics. 
-          Next, the 2D-3D OVS extracts the fused 2D-3D descriptor to compute the cosine similarity with the text embeddings corresponding to a set of semantic classes.
+          <strong><font size="4">Scene Geometry Encoder (SGE):</font></strong> Our SGE has two outputs: 1) DINO features, simply extracted from RGB frames by the DINO model, 
+          2) geoDINO features obtained from the joint processing of DINO features and depth maps, projected respectively into appearance and geometric features, and used as keys and queries to attend over.
+        </p>
+
+        <div class="content has-text-centered">
+            <img style="width: 100%;" src="./static/images/overview_ov3r.jpg"
+             alt="Reconstruction Result."/>
+        </div>
+        <p>
+          <strong><font size="4">Framework of Nueral Implicit and Explicit Representations:</font></strong> In the NeRF-based pipeline (left), we leverage EDINO features to supervise the tri-plane (red double arrow) while DINO features guide the optimization of the estimated DINO feature map (red double arrow).
+           In the 3DGS-based pipeline (right), we incorporate the corresponding EDINO feature into the parameters of each Gaussian (blue arrow). Meanwhile, the DINO features are leveraged to guide the learning of DINO information within the representation (blue double arrow).
         </p>
         </h2>
       </div>
@@ -219,8 +228,8 @@
           </div>
           <h2 class="content has-text-justified">
             <p>
-              <strong><font size="4">Annotations:</font></strong> We present open-vocabulary segmentation results of several different objects. 
-              Ov3R demonstrates accurate segmentations for diverse situations, e.g. multiple objects (pillows, chairs), small objects (vases), and large objects (tables). 
+              <strong><font size="4">Visualization of DINO-SLAM and baselines on the Replica dataset.:</font></strong> We present details of reconstruction and rendering quality with red boxes and blue boxes. The two left columns present the reconstruction performance of our DINO-SLAM (NeRF). Our method yields superior mesh results with detailed textures and better completeness. 
+              The two right columns show the rendering results of our DINO-SLAM (GS). Our DINO-SLAM demonstrates high-fidelity and realistic images, especially on text tags and object textures. 
             </p>
           </h2>
           <div class="has-text-centered">
@@ -229,8 +238,8 @@
           </div>
           <h2 class="content has-text-justified">
             <p>
-              <strong><font size="4">Annotations:</font></strong> For each scene, we provide ground truth pointmaps as references, and compare our reconstructed indoor scenes against SLAM3R and Spann3R.
-              Ov3R presents stronger performance on geometry consistency and accuracy, while SLAM3R outputs misaligned recosntructions and Spann3R predicts very sparse pointmaps. 
+              <strong><font size="4">More results and performance on Replica.</font></strong> DINO-SLAM achieves superior camera tracking (left, evaluated on scannet) and 3D reconstruction quality (middle, evaluated on Replica). 
+              Our approach is general: it can be integrated into existing NeRF/GS SLAM systems and boost their results (right, showing some representative GS methods being improved by our proposal).
             </p>
           </h2>
         
@@ -244,7 +253,7 @@
       <div class="column is-full-width">
         <h2 class="title is-3">Reconstruction & Segmentation Results</h2>
           <p>
-              Our final reconstruction and segmentation results are available now. You can find it in the above <i>Results</i> button or you can download it through <a href="https://drive.google.com/file/d/10q3I0boBu5nDRzcZf1LoQTOkPDElDoFk/view?usp=sharing">Google Drive</a>.
+              Our final reconstruction and segmentation results are available now. You can find it in the above <i>Results</i> button or you can download it through <a href="">Google Drive</a>.
           </p>
       </div>
     </div>
@@ -282,10 +291,10 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{gong2025ov3r,
-  title={Ov3R: Open-Vocabulary Semantic 3D Reconstruction from RGB Videos},
-  author={Gong, Ziren and Li, Xiaohan and Tosi, Fabio and Han, Jiawei and Mattoccia, Stefano and Cai, Jianfei and Poggi, Matteo},
-  journal={arXiv preprint arXiv:2507.22052},
+    <pre><code>@article{gong2025dino,
+  title={DINO-SLAM: DINO-informed RGB-D SLAM for Neural Implicit and Explicit Representations},
+  author={Gong, Ziren and Li, Xiaohan and Tosi, Fabio and Zhang, Youmin and Mattoccia, Stefano and Wu, Jun and Poggi, Matteo},
+  journal={arXiv preprint arXiv:2507.19474},
   year={2025}
 }</code></pre>
   </div>
