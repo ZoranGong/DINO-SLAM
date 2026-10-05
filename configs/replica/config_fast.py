@@ -27,7 +27,7 @@ config = dict(
     use_wandb = False,
     wandb = dict(
         name = name,
-        project_name = "GauS_SLAM_Replica",
+        project_name = "DINO_SLAM_Replica",
     ),
         
     render = dict(
@@ -114,19 +114,19 @@ config = dict(
     # Scene Geometry Encoder / GeoDINO features 
     sge = dict(
         enable = True,
-        dino_model = 'dinov2_vitb14', # torch.hub model of facebookresearch/dinov2
-        dino_weights = None, # optional local checkpoint
+        dino_model = 'dinov2_vitb14', 
+        dino_weights = None, 
         dino_input_height = 448,
         d_model = 128,
         num_heads = 4,
-        feat_dim = 16, # per-Gaussian feature dimension
+        feat_dim = 16, 
         head_hidden = 128,
-        depth_scale = 5.0, # depth normalization (m)
+        depth_scale = 5.0, 
         lr = 1e-3, 
         warmup_lr = 3e-3, 
         N_stage1 = num_ba_iters, 
         N_warmup = 50, 
-        N_joint = -1, # joint iterations, -1 = until the end
+        N_joint = -1, 
         loss_res_scale = 2, 
         mask_alpha_th = 0.5,
         frontend_init = True, 

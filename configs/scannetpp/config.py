@@ -112,7 +112,7 @@ config = dict(
             feat_ae = 1.0,
         ),
     ),
-    # Scene Geometry Encoder / GeoDINO features (slam/SGE.py)
+    # Scene Geometry Encoder / GeoDINO features
     sge = dict(
         enable = True,
         dino_model = 'dinov2_vitb14', # torch.hub model of facebookresearch/dinov2
@@ -122,23 +122,23 @@ config = dict(
         num_heads = 4,
         feat_dim = 16, # per-Gaussian feature dimension
         head_hidden = 128,
-        depth_scale = 5.0, # depth normalization (m)
-        lr = 1e-3, # SGE + MLPs learning rate (joint stage)
-        warmup_lr = 3e-3, # SGE + MLPs learning rate (warm-up)
-        N_stage1 = num_ba_iters, # backend mapping iterations before SGE starts
-        N_warmup = 50, # SGE-only iterations, Gaussians frozen
-        N_joint = -1, # joint iterations, -1 = until the end
-        loss_res_scale = 2, # feature losses at DINO patch grid x this scale
+        depth_scale = 5.0, 
+        lr = 1e-3, 
+        warmup_lr = 3e-3, 
+        N_stage1 = num_ba_iters, 
+        N_warmup = 50, 
+        N_joint = -1, 
+        loss_res_scale = 2, 
         mask_alpha_th = 0.5,
-        frontend_init = True, # initialize new Gaussians' features with a frozen SGE copy in the frontend
+        frontend_init = True, 
         dino_cache_size = 16,
         dino_fp16 = True,
-        feat_render_checkpoint = False, # checkpoint the feature passes to save VRAM
-        feat_render_scale = 0.25, # raster size of the feature passes relative to the image
-        sge_every_max = 4, # under congestion the SGE losses are used every (1 + waiting submaps) iterations at most
-        feat_grad_to_geometry = False, # feature losses update the geometry as well
-        feat_loss_ratio = 0.5, # feature loss is scaled to at most this fraction of the RGB-D loss
-        grad_clip = 1.0, # gradient norm clip of SGE + MLPs
+        feat_render_checkpoint = False, 
+        feat_render_scale = 0.25, 
+        sge_every_max = 4, 
+        feat_grad_to_geometry = False, 
+        feat_loss_ratio = 0.5, 
+        grad_clip = 1.0, 
     ),
     data=dict(
         dataset_name="scannetpp",

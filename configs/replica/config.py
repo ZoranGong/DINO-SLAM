@@ -35,7 +35,7 @@ config = dict(
     use_wandb = False,
     wandb = dict(
         name = name,
-        project_name = "GauS_SLAM_Replica",
+        project_name = "DINO_SLAM_Replica",
     ),
     
     render = dict(
@@ -150,8 +150,8 @@ config = dict(
     ),
     data=dict(
         dataset_name="Replica",
-        meshdir="/data/Replica",
-        basedir="/data/Replica",
+        meshdir="/media/ziren/Data/ziren/data/Replica",
+        basedir="/media/ziren/Data/ziren/data/Replica",
         gradslam_data_cfg="./configs/data/replica.yaml",
         sequence=scene_name,
         desired_image_height=340 * 2,
