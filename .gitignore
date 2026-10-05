@@ -1,0 +1,10 @@
+.vscode
+tmp
+output
+build
+*.egg-info
+*.pyc
+*.cpython
+/data
+wandb/
+__pycache__
