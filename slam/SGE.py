@@ -35,7 +35,6 @@ def sine_pos_embed(hp, wp, d, device):
 
 
 class DummyDINO(nn.Module):
-    # offline stand-in for DINOv2 with the same interface (unit tests)
     def __init__(self, patch_size=14, embed_dim=64, seed=0):
         super().__init__()
         g = torch.Generator().manual_seed(seed)
@@ -51,7 +50,6 @@ class DummyDINO(nn.Module):
 
 
 class DinoBackbone(nn.Module):
-    # frozen DINOv2 patch-token extractor: rgb [H, W, 3] in [0, 1] -> f_dino [C, hp, wp]
     def __init__(self, name='dinov2_vitb14', input_height=448, weights=None, hub_repo='facebookresearch/dinov2'):
         super().__init__()
         if name == 'dummy':
@@ -100,7 +98,6 @@ class DinoBackbone(nn.Module):
 
 
 class SceneGeometryEncoder(nn.Module):
-    # f_dino [C, hp, wp], depth [H, W, 1] -> f_gD [d_model, hp, wp]
     def __init__(self, dino_dim, d_model=128, num_heads=4, patch=14, depth_scale=5.0):
         super().__init__()
         self.d = d_model
@@ -142,7 +139,6 @@ class SceneGeometryEncoder(nn.Module):
 
 
 class GeoDINOHead(nn.Module):
-    # mlp_reduce: d_model -> feat_dim, mlp_upsample: feat_dim -> dino_dim
     def __init__(self, d_model, dino_dim, feat_dim=16, hidden=128):
         super().__init__()
         self.feat_dim = feat_dim
@@ -181,7 +177,6 @@ class SGESystem:
         self.head = GeoDINOHead(self.encoder.d, self.backbone.dim, self.feat_dim,
                                 hidden=int(cfg.get('head_hidden', 128))).to(device)
 
-        # three-stage schedule: stage1 (plain mapping) -> warmup (Group A only) -> joint
         self.n_stage1 = int(cfg.get('N_stage1', config.get('backend', {}).get('num_ba_iters', 0)))
         self.n_warmup = int(cfg.get('N_warmup', 20))
         self.n_joint = int(cfg.get('N_joint', -1))
@@ -263,7 +258,6 @@ class SGESystem:
                 self._dino_cache.popitem(last=False)
 
     def prefetch(self, items):
-        # cache DINO features of [(key, rgb), ...] in a background thread
         items = [(k, rgb) for k, rgb in items if rgb is not None]
         if not items:
             return
@@ -295,7 +289,6 @@ class SGESystem:
 
     @torch.no_grad()
     def init_feature_map(self, rgb, depth, key=None):
-        # per-pixel features [H, W, feat_dim] used to initialize new Gaussians (get_pointcloud)
         H, W = rgb.shape[0], rgb.shape[1]
         f16 = self.encode16(self.dino(key, rgb), depth)
         f16 = F.interpolate(f16[None], size=(H, W), mode='bilinear', align_corners=False)[0]

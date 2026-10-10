@@ -68,7 +68,7 @@ class Frontend:
         self.tracking_flag = True
         self.avg_depth_l1 = 0.05
 
-        # frozen SGE copy, only used to initialize the feature attribute of new Gaussians
+        
         self.sge_frontend_init = sge_enabled(config) and config['sge'].get('frontend_init', True)
         self._sge = None
 
@@ -143,7 +143,7 @@ class Frontend:
         for iter in range(self.num_mapping_iters):
             
             mapping_start_time = time.time()
-            frame: Frame = random.choice(frames) # random.choice(frames) # cameras[time_idx]
+            frame: Frame = random.choice(frames) 
             self.map.optimizer.zero_grad(set_to_none=True)
             if self.config['render']['enable_exposure']:
                 frame.exposure.optimizer.zero_grad(set_to_none=True)

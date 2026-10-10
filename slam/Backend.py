@@ -53,7 +53,7 @@ class Backend():
         self.totalpts_rec = []
         self.mapping_iter = 0
 
-        # SGE (Group A), backend only
+    
         self.use_sge = sge_enabled(config)
         self._sge = None
         sge_cfg = config.get('sge', {})
@@ -61,12 +61,12 @@ class Backend():
         self.feat_loss_ratio = sge_cfg.get('feat_loss_ratio', 0.5)
         self.sge_grad_clip = sge_cfg.get('grad_clip', 1.0)
 
-        # saved-frame RGB-D stays on the GPU only for the active (current + covisible) submaps
+        
         self.offload_frames = config['backend'].get('offload_frames', True)
         self.mem_cleanup_interval = config['backend'].get('mem_cleanup_interval', 50)
         self.active_lm_idxs = set()
 
-        # congestion control: task budget and preemption depend on the number of waiting submaps
+        
         self.min_ba_iters = config['backend'].get('min_ba_iters', max(4, self.num_ba_iters // 4))
         self.congestion_gain = config['backend'].get('congestion_gain', 1.0)
         self.preempt_keep_ratio = config['backend'].get('preempt_keep_ratio', 0.25)
@@ -268,7 +268,7 @@ class Backend():
     
     def final_refine(self):
         iters = self.config['backend']['final_refinement']
-        # default iters = num_frames
+        
         if iters == -1:
             iters = self.local_maps[-1].frames[-1].time_idx
         for i in tqdm(range(iters), total=iters, desc="final_refine"):
@@ -476,8 +476,7 @@ class mp_Backend(Backend):
                     self.vis_render.destory()
                 
                 break 
-            # a waiting submap is admitted when the task list is empty, or right away
-            # (after shrinking the task list) once preempt_pending_th submaps are waiting
+
             pending = self.pending_submaps()
             has_submap = pending > 0
             if has_submap and not self.task_queue.empty():

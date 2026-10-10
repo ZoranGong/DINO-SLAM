@@ -118,8 +118,8 @@ config = dict(
     # Scene Geometry Encoder / GeoDINO features
     sge = dict(
         enable = True,
-        dino_model = 'dinov2_vitb14', # torch.hub model of facebookresearch/dinov2
-        dino_weights = None, # optional local checkpoint
+        dino_model = 'dinov2_vitb14', 
+        dino_weights = None, 
         dino_input_height = 448,
         d_model = 128,
         num_heads = 4,
