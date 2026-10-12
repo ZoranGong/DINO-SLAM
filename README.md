@@ -55,8 +55,8 @@ git clone https://github.com/ZoranGong/DINO-SLAM.git
 Then setup environment from the provided requirements file,
 
 ```
-conda create -n gaus python=3.10
-conda activate gaus
+conda create -n dinoslam python=3.10
+conda activate dinoslam
 conda install -c "nvidia/label/cuda-11.6.0" cuda-toolkit
 pip install torch==1.12.1+cu116 torchvision==0.13.1+cu116 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu116
 pip install -r requirements.txt
@@ -68,7 +68,7 @@ conda install pytorch3d-0.7.5-py310_cu116_pyt1121.tar.bz2
 
 ## 🚀 Usage
 
-Here we will introduce the usage of GauS-SLAM, experiments of the paper and visualization of the results.
+Here we will introduce the usage of DINO-SLAM, experiments of the paper and visualization of the results.
 
 ### Datasets
 
